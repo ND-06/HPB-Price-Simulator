@@ -18,19 +18,17 @@ img {
   text-align: center;
 }
 
-a {
-  color: #17a2b8;
-  margin-right: 
-  
+#hpblink {
+  color: white;
 }
 
-a:hover {
-  color: white;
+#hpblink:hover {
+  color: #17a2b8;
   text-decoration: none;
 }
 
-a:visited {
-  color: white;
+#hpblink:visited {
+  color: #17a2b8;
 }
 
 #resultParagraph {

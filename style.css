@@ -3,6 +3,7 @@ body {
   font-family: 'Lato', sans-serif;
   color: white;
   margin: 0 auto;
+  height: 100%;
 }
 
 img {
@@ -23,7 +24,7 @@ img {
 }
 
 #hpblink:hover {
-  color: #17a2b8;
+  color: #083f77;
   text-decoration: none;
 }
 

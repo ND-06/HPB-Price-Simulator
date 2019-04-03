@@ -17,6 +17,7 @@ img {
   align-items: center;
   padding-right: 10%;
   text-align: center;
+  margin: 0 auto;
 }
 
 #hpblink {
@@ -58,4 +59,3 @@ font-size: 1.1rem;
   font-size: 1.50rem;
   font-family: 'Montserrat', sans-serif;
 }
-

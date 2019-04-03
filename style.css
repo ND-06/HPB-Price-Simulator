@@ -24,7 +24,7 @@ img {
 }
 
 #hpblink:hover {
-  color: #083f77;
+  color: #17a2b8;
   text-decoration: none;
 }
 
@@ -39,3 +39,23 @@ img {
 input {
   margin-bottom: 1.25rem;
 }
+
+nav {
+  height: 70px;
+  margin-bottom: 40px;
+}
+
+nav .btn-outline-info:hover {
+  color:blue;
+}
+
+a.nav-link {
+color: white;
+font-size: 1.1rem;
+}
+
+.logonavbar {
+  font-size: 1.50rem;
+  font-family: 'Montserrat', sans-serif;
+}
+

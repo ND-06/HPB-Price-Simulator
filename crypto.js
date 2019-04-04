@@ -1,7 +1,7 @@
-let portfolioAmount, hpbFuturePrice, marketCap, circulationSupply, tokenQuantity, button, result, coinInfoParagraph;
+let portfolioAmount, hpbFuturePrice, marketCap, circulatingSupply, tokenQuantity, button, result, coinInfoParagraph;
 
 marketCap = document.getElementById('marketcapInput');
-circulationSupply = document.getElementById('circulationSupplyInput');
+circulatingSupply = document.getElementById('circulatingSupplyInput');
 tokenQuantity = document.getElementById('tokenquantityInput');
 result = document.querySelector('#resultParagraph');
 button = document.querySelector('button');
@@ -31,9 +31,10 @@ async function getPriceAndMcap() {
     const result = await fetch 
     (`https://api.coingecko.com/api/v3/coins/high-performance-blockchain`);
     const data = await result.json();
+    const currentCirculatingSupply = data.market_data.circulating_supply;
     const price = data.market_data.current_price.usd;
     const marketCap = data.market_data.market_cap.usd;
-    const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(price)} with a current market Cap of $${formatNumber(marketCap)}`;
+    const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(price)} with a current market Cap of $${formatNumber(marketCap)} and a current circulating supply of ${formatNumber(currentCirculatingSupply)} tokens.`;
     return coinInfo;
   } catch(error) {
     console.log(error);
@@ -47,10 +48,10 @@ getPriceAndMcap().then(result => {
 
 function simulateFuturePrice() {
   button.addEventListener('click', function() {
-    portfolioAmount = (marketCap.value / circulationSupply.value)*tokenQuantity.value;
-    hpbFuturePrice = (marketCap.value / circulationSupply.value);
+    portfolioAmount = (marketCap.value / circulatingSupply.value)*tokenQuantity.value;
+    hpbFuturePrice = (marketCap.value / circulatingSupply.value);
     result.textContent = `
-      Your hpb portfolio will worth $${formatNumber(portfolioAmount)} USD. With the Marketcap and the Circulation Supply specified, HPB Token will worth ${formatNumber(hpbFuturePrice)} USD
+      Your hpb portfolio will worth $${formatNumber(portfolioAmount)} USD. With the Marketcap and the Circulating Supply specified, HPB Token will worth ${formatNumber(hpbFuturePrice)} USD
     `;
   });
 }

@@ -1,5 +1,11 @@
-let portfolioAmount, hpbFuturePrice, marketCap, circulationSupply, tokenQuantity, typedPrice;
-const coinInfoParagraph = document.querySelector('#cryptoinfo');
+let portfolioAmount, hpbFuturePrice, marketCap, circulationSupply, tokenQuantity, button, result, coinInfoParagraph;
+
+marketCap = document.getElementById('marketcapInput');
+circulationSupply = document.getElementById('circulationSupplyInput');
+tokenQuantity = document.getElementById('tokenquantityInput');
+result = document.querySelector('#resultParagraph');
+button = document.querySelector('button');
+coinInfoParagraph = document.querySelector('#cryptoinfo');
 
 const formatNumber = num => {
   let numSplit, int, dec;
@@ -40,17 +46,6 @@ getPriceAndMcap().then(result => {
 });
 
 function simulateFuturePrice() {
-  const input = document.querySelectorAll('input');
-
-  for (let i = 0; i < input.length; i++) {
-    typedPrice = input[0]
-    marketCap = input[1];
-    circulationSupply = input[2];
-    tokenQuantity = input[3]; 
-  }
-
-  const result = document.querySelector('#resultParagraph');
-  const button = document.querySelector('button');
   button.addEventListener('click', function() {
     portfolioAmount = (marketCap.value / circulationSupply.value)*tokenQuantity.value;
     hpbFuturePrice = (marketCap.value / circulationSupply.value);

@@ -4,7 +4,6 @@ marketCap = document.getElementById('marketcapInput');
 circulatingSupply = document.getElementById('circulatingSupplyInput');
 tokenQuantity = document.getElementById('tokenquantityInput');
 result = document.querySelector('#resultParagraph');
-button = document.querySelector('button');
 coinInfoParagraph = document.querySelector('#cryptoinfo');
 
 const formatNumber = num => {
@@ -47,13 +46,22 @@ getPriceAndMcap().then(result => {
 });
 
 function simulateFuturePrice() {
-  button.addEventListener('click', function() {
     portfolioAmount = (marketCap.value / circulatingSupply.value)*tokenQuantity.value;
     hpbFuturePrice = (marketCap.value / circulatingSupply.value);
     result.textContent = `
       Your hpb portfolio will worth $${formatNumber(portfolioAmount)} USD. With the Marketcap and the Circulating Supply specified, HPB Token will worth ${formatNumber(hpbFuturePrice)} USD
     `;
-  });
-}
+};
 
-simulateFuturePrice();
+const setupEventListeners = () => {
+  document.addEventListener('keypress', function(event){ 
+    if (event.keyCode === 13 || event.which === 13) {
+      simulateFuturePrice();
+      event.preventDefault();
+    }
+  });  
+  button = document.querySelector('button');
+  button.addEventListener('click', simulateFuturePrice);
+};
+
+setupEventListeners();

@@ -53,7 +53,6 @@ async function getPriceAndMcap() {
     console.log(error);
   }
 }
-
 getPriceAndMcap().then((result) => {
   const newContent = `<p class='text-info text-center mt-5' id='cryptoinfo'>${result}</p>`;
   coinInfoParagraph.insertAdjacentHTML('afterbegin', newContent);
@@ -83,3 +82,8 @@ const setupEventListeners = () => {
 };
 
 setupEventListeners();
+
+window.setInterval(() => {
+  getPriceAndMcap();
+  console.log('Hello');
+}, 6000);

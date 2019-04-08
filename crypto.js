@@ -34,29 +34,32 @@ const formatNumber = (num) => {
   return `${int}.${dec}`;
 };
 
-async function getPriceAndMcap() {
-  try {
-    const result = await fetch(
-      'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
-    );
-    const data = await result.json();
-    const currentCirculatingSupply = data.market_data.circulating_supply;
-    const price = data.market_data.current_price.usd;
-    const marketCap = data.market_data.market_cap.usd;
-    const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
-      price,
-    )} with a current market Cap of $${formatNumber(
-      marketCap,
-    )} and a current circulating supply of ${formatNumber(currentCirculatingSupply)} tokens.`;
-    return coinInfo;
-  } catch (error) {
-    console.log(error);
+function refresh() {
+  async function getPriceAndMcap() {
+    try {
+      const result = await fetch(
+        'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
+      );
+      const data = await result.json();
+      const currentCirculatingSupply = data.market_data.circulating_supply;
+      const price = data.market_data.current_price.usd;
+      const marketCap = data.market_data.market_cap.usd;
+      const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
+        price,
+      )} with a current market Cap of $${formatNumber(
+        marketCap,
+      )} and a current circulating supply of ${formatNumber(currentCirculatingSupply)} tokens.`;
+      return coinInfo;
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  getPriceAndMcap().then((result) => {
+    const newContent = `<p class='text-info text-center mt-5' id='cryptoinfo'>${result}</p>`;
+    coinInfoParagraph.insertAdjacentHTML('afterbegin', newContent);
+  });
 }
-getPriceAndMcap().then((result) => {
-  const newContent = `<p class='text-info text-center mt-5' id='cryptoinfo'>${result}</p>`;
-  coinInfoParagraph.insertAdjacentHTML('afterbegin', newContent);
-});
 
 function simulateFuturePrice() {
   portfolioAmount = (marketCap.value / circulatingSupply.value) * tokenQuantity.value;
@@ -84,6 +87,5 @@ const setupEventListeners = () => {
 setupEventListeners();
 
 window.setInterval(() => {
-  getPriceAndMcap();
-  console.log('Hello');
+  refresh();
 }, 6000);

@@ -4,7 +4,7 @@ let marketCap;
 let circulatingSupply;
 let tokenQuantity;
 let button;
-let result;
+let resultInfo;
 let coinInfoParagraph;
 
 marketCap = document.getElementById('marketcapInput');
@@ -43,20 +43,19 @@ function refresh() {
       const data = await result.json();
       const currentCirculatingSupply = data.market_data.circulating_supply;
       const price = data.market_data.current_price.usd;
-      const marketCap = data.market_data.market_cap.usd;
+      const marketCapInfo = data.market_data.market_cap.usd;
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
       )} with a current market Cap of $${formatNumber(
-        marketCap,
+        marketCapInfo,
       )} and a current circulating supply of ${formatNumber(currentCirculatingSupply)} tokens.`;
       return coinInfo;
     } catch (error) {
       console.log(error);
     }
   }
-
-  getPriceAndMcap().then((result) => {
-    const newContent = `<p class='text-info text-center mt-5' id='cryptoinfo'>${result}</p>`;
+  getPriceAndMcap().then((resultInfo) => {
+    const newContent = `<p class='text-info text-center mt-5' id='cryptoinfo'>${resultInfo}</p>`;
     coinInfoParagraph.insertAdjacentHTML('afterbegin', newContent);
   });
 }
@@ -88,4 +87,5 @@ setupEventListeners();
 
 window.setInterval(() => {
   refresh();
+  console.log('Hello');
 }, 6000);

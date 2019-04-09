@@ -1,66 +1,104 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Crypto Price Simulator</title>
+  </head>
 
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Crypto Price Simulator</title>
+  <body>
+    <h1
+      class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 display-4 text-center text-info mb-5 d-flex justify-content-center"
+    >
+      HPB Price Simulator
+    </h1>
 
-</head>
+    <wrapper>
+      <section>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div
+              class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 logo d-flex justify-content-center"
+            >
+              <img class="img-fluid" src="hpblogo.png" />
+              <a id="hpblink" href="https://hpb.io/"
+                >High Performance Blockchain</a
+              >
+            </div>
 
-<body>
+            <div class="d-flex justify-content-center"></div>
+            <p
+              class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 text-info text-center justify-content-center"
+              id="cryptoinfo"
+            ></p>
 
-<h1 class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 display-4 text-center text-info mb-5 d-flex justify-content-center">HPB Price Simulator</h1>
+            <div
+              class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 justify-content-center"
+            >
+              <label for="marketcapInput"
+                >Enter the expected Marketcap in USD</label
+              >
+              <input type="number" class="form-control" id="marketcapInput" />
+              <label for="circulationSupplyInput"
+                >Enter the expected Circulating Supply</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="circulatingSupplyInput"
+              />
+              <label for="tokenquantityInput"
+                >Enter the Number of HPB tokens in your Portfolio</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="tokenquantityInput"
+              />
+            </div>
 
-<wrapper>
+            <div class="col-9 text-center">
+              <button class="btn btn-info text-center mt-4">
+                Calculate the price
+              </button>
+            </div>
 
-  <section>
-  
-    <div class="container">
-      
-      <div class="row justify-content-center">
-
-        <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 logo d-flex justify-content-center">
-          <img class="img-fluid" src="hpblogo.png">
-          <a id="hpblink" href="https://hpb.io/">High Performance Blockchain</a>
+            <div
+              class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 d-flex justify-content-center mt-4"
+            >
+              <p class="text-info text-center" id="resultParagraph"></p>
+            </div>
+          </div>
         </div>
+      </section>
+    </wrapper>
 
-
-        <div class="d-flex justify-content-center"></div>
-          <p class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 text-info text-center justify-content-center" id="cryptoinfo"></p>
-      
-        <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 justify-content-center">    
-              <label for="marketcapInput">Enter the expected Marketcap in USD</label>
-              <input type="number" class="form-control" id="marketcapInput">
-              <label for="circulationSupplyInput">Enter the expected Circulating Supply</label>
-              <input type="number" class="form-control" id="circulatingSupplyInput">
-              <label for="tokenquantityInput">Enter the Number of HPB tokens in your Portfolio</label>
-              <input type="number" class="form-control" id="tokenquantityInput">
-        </div>
-      
-        <div class="col-9 text-center">  
-          <button class="btn btn-info text-center mt-4">Calculate the price</button>
-        </div>  
-
-        <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 d-flex justify-content-center mt-4">
-          <p class="text-info text-center" id="resultParagraph"></p>
-        </div>
-      
-      </div>  
-    
-    </div>
-
-  </section>
-
-</wrapper>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-<script src="crypto.js" type="text/javascript"></script>
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+    <script src="crypto.js" type="text/javascript"></script>
+  </body>
 </html>

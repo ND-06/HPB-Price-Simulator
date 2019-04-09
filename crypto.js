@@ -47,7 +47,9 @@ function refresh() {
   }
   // eslint-disable-next-line no-shadow
   getPriceAndMcap().then((result) => {
+    // Cleaning our DOM before refreshing
     coinInfoParagraph.innerHTML = '';
+
     const newContent = `<p class='text-info text-center mt-5' id='cryptoinfo'>${result}</p>`;
     coinInfoParagraph.insertAdjacentHTML('afterbegin', newContent);
   });
@@ -80,4 +82,4 @@ setupEventListeners();
 
 window.setInterval(() => {
   refresh();
-}, 650);
+}, 2000);

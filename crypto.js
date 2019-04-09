@@ -82,4 +82,4 @@ setupEventListeners();
 
 window.setInterval(() => {
   refresh();
-}, 2000);
+}, 650);

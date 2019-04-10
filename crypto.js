@@ -32,14 +32,17 @@ function refresh() {
         'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
       );
       const data = await dataResult.json();
+      console.log(data);
       const currentCirculatingSupply = data.market_data.circulating_supply;
       const price = data.market_data.current_price.usd;
       const marketCapInfo = data.market_data.market_cap.usd;
+      const marketCapRank = data.market_cap_rank;
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
       )} with a current market Cap of $${formatNumber(
         marketCapInfo,
-      )} and a current circulating supply of ${formatNumber(currentCirculatingSupply)} tokens.`;
+      )} and a current circulating supply of ${formatNumber(currentCirculatingSupply)} tokens.<br>
+      High Performance Blockchain is ranked ${marketCapRank} in Market Cap rank`;
       return coinInfo;
     } catch (error) {
       return error;

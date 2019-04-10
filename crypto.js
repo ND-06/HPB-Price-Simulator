@@ -8,28 +8,11 @@ const tokenQuantity = document.getElementById('tokenquantityInput');
 const result = document.querySelector('#resultParagraph');
 const coinInfoParagraph = document.querySelector('#cryptoinfo');
 
-const formatNumber = (num) => {
+const formatNumber = (num, rounder) => {
   // eslint-disable-next-line no-param-reassign
   num = Math.abs(num);
   // eslint-disable-next-line no-param-reassign
-  num = num.toFixed(6);
-  const numSplit = num.split('.');
-  // eslint-disable-next-line prefer-destructuring
-  let int = numSplit[0];
-  if (int.length > 3) {
-    for (let i = 3; i < int.length; i += 4) {
-      int = `${int.substr(0, int.length - i)},${int.substr(int.length - i, i)}`;
-    }
-  }
-  const dec = numSplit[1];
-  return `${int}.${dec}`;
-};
-
-const formatNumber2 = (num) => {
-  // eslint-disable-next-line no-param-reassign
-  num = Math.abs(num);
-  // eslint-disable-next-line no-param-reassign
-  num = num.toFixed(2);
+  num = num.toFixed(rounder);
   const numSplit = num.split('.');
   // eslint-disable-next-line prefer-destructuring
   let int = numSplit[0];
@@ -55,9 +38,14 @@ function refresh() {
       const marketCapRank = data.market_cap_rank;
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
-      )} with a current market Cap of $${formatNumber2(
+        6,
+      )} with a current market Cap of $${formatNumber(
         marketCapInfo,
-      )} and a current circulating supply of $${formatNumber2(currentCirculatingSupply)} tokens.<br>
+        2,
+      )} and a current circulating supply of $${formatNumber(
+        currentCirculatingSupply,
+        2,
+      )} tokens.<br>
       High Performance Blockchain Market cap rank : ${marketCapRank}`;
       return coinInfo;
     } catch (error) {
@@ -78,10 +66,12 @@ function simulateFuturePrice() {
   portfolioAmount = (marketCap.value / circulatingSupply.value) * tokenQuantity.value;
   hpbFuturePrice = marketCap.value / circulatingSupply.value;
   result.textContent = `
-      Your hpb portfolio will worth $${formatNumber2(
+      Your hpb portfolio will worth $${formatNumber(
     portfolioAmount,
-  )} USD. With the Marketcap and the Circulating Supply specified, HPB Token will worth ${formatNumber2(
+    2,
+  )} USD. With the Marketcap and the Circulating Supply specified, HPB Token will worth ${formatNumber(
   hpbFuturePrice,
+  2,
 )} USD
     `;
 }

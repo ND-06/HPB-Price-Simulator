@@ -12,7 +12,7 @@ const formatNumber = (num) => {
   // eslint-disable-next-line no-param-reassign
   num = Math.abs(num);
   // eslint-disable-next-line no-param-reassign
-  num = num.toFixed(2);
+  num = num.toFixed(6);
   const numSplit = num.split('.');
   // eslint-disable-next-line prefer-destructuring
   let int = numSplit[0];

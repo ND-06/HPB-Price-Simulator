@@ -42,7 +42,7 @@ function refresh() {
       )} with a current market Cap of $${formatNumber(
         marketCapInfo,
         2,
-      )} and a current circulating supply of $${formatNumber(
+      )} and a current circulating supply of ${formatNumber(
         currentCirculatingSupply,
         2,
       )} tokens.<br>

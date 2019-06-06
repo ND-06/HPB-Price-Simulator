@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 let portfolioAmount;
 let hpbFuturePrice;
 let button;
@@ -14,6 +15,7 @@ const formatNumber = (num, rounder) => {
   // eslint-disable-next-line no-param-reassign
   num = num.toFixed(rounder);
   const numSplit = num.split('.');
+
   // eslint-disable-next-line prefer-destructuring
   let int = numSplit[0];
   if (int.length > 3) {
@@ -35,6 +37,9 @@ function refresh() {
       const currentCirculatingSupply = data.market_data.circulating_supply;
       const price = data.market_data.current_price.usd;
       const marketCapInfo = data.market_data.market_cap.usd;
+      // Link the input with the marketCapInfo value , in order to get
+      // it directly in the mCap input field
+      marketCap.value = marketCapInfo;
       const marketCapRank = data.market_cap_rank;
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
@@ -57,7 +62,7 @@ function refresh() {
     // Cleaning our DOM before refreshing
     coinInfoParagraph.innerHTML = '';
 
-    const newContent = `<p class='text-info text-center mt-5' id='cryptoinfo'>${result}</p>`;
+    const newContent = `<p class='text-center mt-5' id='cryptoinfo'>${result}</p>`;
     coinInfoParagraph.insertAdjacentHTML('afterbegin', newContent);
   });
 }
@@ -69,10 +74,10 @@ function simulateFuturePrice() {
       Your hpb portfolio will worth $${formatNumber(
     portfolioAmount,
     2,
-  )} USD. With the Marketcap and the Circulating Supply specified, HPB Token will worth ${formatNumber(
+  )}. With the Marketcap and the Circulating Supply specified, HPB Token will worth $${formatNumber(
   hpbFuturePrice,
   2,
-)} USD
+)}
     `;
 }
 

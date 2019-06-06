@@ -43,14 +43,14 @@ function refresh() {
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
         6,
-      )} with a current market Cap of $${formatNumber(
+      )} with a current market cap of $${formatNumber(
         marketCapInfo,
         2,
       )} and a current circulating supply of ${formatNumber(
         currentCirculatingSupply,
         2,
       )} tokens.<br>
-      High Performance Blockchain Market cap rank : ${marketCapRank}`;
+      HPB market cap rank : ${marketCapRank}`;
       return coinInfo;
     } catch (error) {
       return error;
@@ -73,7 +73,7 @@ function simulateFuturePrice() {
       Your hpb portfolio will worth $${formatNumber(
     portfolioAmount,
     2,
-  )}. With the Marketcap and the Circulating Supply specified, HPB Token will worth $${formatNumber(
+  )}. With the market cap and the circulating supply specified, HPB token will worth $${formatNumber(
   hpbFuturePrice,
   2,
 )}

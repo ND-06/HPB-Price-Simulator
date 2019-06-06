@@ -50,7 +50,7 @@ function refresh() {
         currentCirculatingSupply,
         2,
       )} tokens.<br>
-      HPB market cap rank : ${marketCapRank}`;
+      HPB market cap rank #${marketCapRank}`;
       return coinInfo;
     } catch (error) {
       return error;

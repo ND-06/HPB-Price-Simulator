@@ -39,7 +39,6 @@ function refresh() {
       const marketCapInfo = data.market_data.market_cap.usd;
       // Link the input with the marketCapInfo value , in order to get
       // it directly in the mCap input field
-      marketCap.value = marketCapInfo;
       const marketCapRank = data.market_cap_rank;
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,

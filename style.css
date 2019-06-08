@@ -46,7 +46,8 @@ h1 {
 }
 
 #resultParagraph {
-  font-weight: bold;
+  font-weight: 500;
+  color: white !important;
 }
 
 input {

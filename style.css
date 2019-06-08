@@ -11,6 +11,20 @@ body {
   height: 100%;
 }
 
+.logodiv {
+  margin-bottom: -10vh;
+  margin-top: -10vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  max-height: 23vh;
+}
+
+h1 {
+  display: none !important;
+}
+
 #particles-js {
   position: fixed;
   width: 100%;
@@ -31,20 +45,6 @@ body {
   top: 0px;
 }
 
-#hpblink {
-  color: white;
-  font-size: 1.15rem;
-}
-
-#hpblink:hover {
-  color: #17a2b8;
-  text-decoration: none;
-}
-
-#hpblink:visited {
-  color: white;
-}
-
 #resultParagraph {
   font-weight: bold;
 }
@@ -54,6 +54,7 @@ input {
 }
 
 #cryptoinfo {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
 }

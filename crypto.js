@@ -40,7 +40,10 @@ function refresh() {
       // get current circulating supply
       const currentCirculatingSupply = data.market_data.circulating_supply;
       // get current price
+      const athInBtc = data.market_data.ath.btc;
+      const athInUsd = data.market_data.ath.usd;
       const price = data.market_data.current_price.usd;
+      const valueChangeIn24H = data.market_data.price_change_percentage_24h;
       // get current mcap
       const marketCapInfo = data.market_data.market_cap.usd;
       // get current mcap rank
@@ -57,6 +60,9 @@ function refresh() {
         currentCirculatingSupply,
         2,
       )} tokens.<br>
+      All Time High in USD : $${athInUsd} <br>
+      All Time High in BTC : Ƀ${athInBtc} <br>
+      Value change in 24 Hours : ${formatNumber(valueChangeIn24H, 2)} % <br>
       HPB market cap rank #${marketCapRank}`;
       return coinInfo;
     } catch (error) {

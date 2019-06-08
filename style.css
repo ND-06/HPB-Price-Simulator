@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Lato', sans-serif;
   color: white !important ;
   margin: 30px;
   height: 100%;
@@ -55,7 +55,7 @@ input {
 }
 
 #cryptoinfo {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   color: white;
 }

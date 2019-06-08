@@ -34,14 +34,22 @@ function refresh() {
         'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
       );
       const data = await dataResult.json();
+      // get current price in BTC
+      const satoshiPrice = data.tickers[1].last;
+      // get current circulating supply
       const currentCirculatingSupply = data.market_data.circulating_supply;
+      // get current price
       const price = data.market_data.current_price.usd;
+      // get current mcap
       const marketCapInfo = data.market_data.market_cap.usd;
+      // get current mcap rank
       const marketCapRank = data.market_cap_rank;
+
+      // Display all data
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
         6,
-      )} with a current market cap of $${formatNumber(
+      )} ( Ƀ${satoshiPrice} )  with a current market cap of $${formatNumber(
         marketCapInfo,
         2,
       )} and a current circulating supply of ${formatNumber(

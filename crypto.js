@@ -35,7 +35,8 @@ function refresh() {
       );
       const data = await dataResult.json();
       // get current price in BTC
-      const satoshiPrice = data.tickers[1].last;
+      console.log(data);
+      const satoshiPrice = data.tickers[5].last;
       // get current circulating supply
       const currentCirculatingSupply = data.market_data.circulating_supply;
       // get current price

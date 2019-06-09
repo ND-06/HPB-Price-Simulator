@@ -52,7 +52,7 @@ function refresh() {
       // Display all data
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
-        6,
+        4,
       )} ( Ƀ${satoshiPrice} ) with a current market cap of $${formatNumber(
         marketCapInfo,
         2,

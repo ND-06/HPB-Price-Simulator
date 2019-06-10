@@ -1,5 +1,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
+
+const numerous = 10000000;
+console.log(numerous.toLocaleString());
 let portfolioAmount;
 let hpbFuturePrice;
 let button;
@@ -132,3 +135,7 @@ getDataInInputs();
 window.setInterval(() => {
   refresh();
 }, 650);
+
+new AutoNumeric('#tokenquantityInput');
+new AutoNumeric('#circulatingSupplyInput');
+new AutoNumeric('#marketcapInput');

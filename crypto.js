@@ -1,15 +1,15 @@
+/* eslint-disable no-new */
+/* eslint-disable no-undef */
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 
-const numerous = 10000000;
-console.log(numerous.toLocaleString());
 let portfolioAmount;
 let hpbFuturePrice;
 let button;
 
-const marketCap = document.getElementById('marketcapInput');
-const circulatingSupply = document.getElementById('circulatingSupplyInput');
-const tokenQuantity = document.getElementById('tokenquantityInput');
+let marketCap = document.getElementById('marketcapInput');
+let circulatingSupply = document.getElementById('circulatingSupplyInput');
+let tokenQuantity = document.getElementById('tokenquantityInput');
 const result = document.querySelector('#resultParagraph');
 const coinInfoParagraph = document.querySelector('#cryptoinfo');
 
@@ -31,13 +31,24 @@ const formatNumber = (num, rounder) => {
   return `${int}.${dec}`;
 };
 
+const formatNumbersInsideInputs = () => {
+  circulatingSupplyInput.value = 38022632;
+  new AutoNumeric('#tokenquantityInput');
+  new AutoNumeric('#circulatingSupplyInput');
+  new AutoNumeric('#marketcapInput');
+};
+
+formatNumbersInsideInputs();
+
 // When page loads, Fill inputs once time with current mcap and circ supply
+/*
 async function getDataInInputs() {
   try {
     const dataResult = await fetch(
       'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
     );
     const data = await dataResult.json();
+
     let currentCirculatingSupply = data.market_data.circulating_supply;
     const marketCapInfo = data.market_data.market_cap.usd;
     marketCap.value = marketCapInfo;
@@ -47,6 +58,7 @@ async function getDataInInputs() {
     return error;
   }
 }
+*/
 
 // Get all essential data from coingecko api ( mcap, circSupply, price in usd, price
 // in BTC, Valuechange in 24h, and ATH in btc and usd)
@@ -62,6 +74,7 @@ function refresh() {
       // get current circulating supply
       let currentCirculatingSupply = data.market_data.circulating_supply;
       currentCirculatingSupply = currentCirculatingSupply.toFixed(0);
+
       // get current price
       const athInBtc = data.market_data.ath.btc;
       const athInUsd = data.market_data.ath.usd;
@@ -77,7 +90,7 @@ function refresh() {
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
         price,
         4,
-      )} ( Ƀ${satoshiPrice} ) with a current market cap of $${formatNumber(
+      )} ( Ƀ${satoshiPrice.toFixed(8)} ) with a current market cap of $${formatNumber(
         marketCapInfo,
         2,
       )} and a current circulating supply of ${formatNumber(
@@ -104,8 +117,19 @@ function refresh() {
 }
 
 function simulateFuturePrice() {
-  portfolioAmount = (marketCap.value / circulatingSupply.value) * tokenQuantity.value;
-  hpbFuturePrice = marketCap.value / circulatingSupply.value;
+  formatNumbersInsideInputs();
+  new AutoNumeric('#tokenquantityInput');
+  new AutoNumeric('#circulatingSupplyInput');
+  new AutoNumeric('#marketcapInput');
+
+  marketCap = parseFloat(marketCap.value.split(',').join(''));
+  circulatingSupply = parseFloat(circulatingSupply.value.split(',').join(''));
+  tokenQuantity = parseFloat(tokenQuantity.value.split(',').join(''));
+
+  portfolioAmount = (marketCap / circulatingSupply) * tokenQuantity;
+
+  hpbFuturePrice = marketCap / circulatingSupply;
+
   result.textContent = `
       Your hpb portfolio will worth $${formatNumber(
     portfolioAmount,
@@ -130,12 +154,6 @@ const setupEventListeners = () => {
 
 setupEventListeners();
 
-getDataInInputs();
-
 window.setInterval(() => {
   refresh();
 }, 650);
-
-new AutoNumeric('#tokenquantityInput');
-new AutoNumeric('#circulatingSupplyInput');
-new AutoNumeric('#marketcapInput');

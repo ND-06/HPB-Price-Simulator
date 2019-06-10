@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 let portfolioAmount;
 let hpbFuturePrice;
@@ -27,6 +28,25 @@ const formatNumber = (num, rounder) => {
   return `${int}.${dec}`;
 };
 
+// When page loads, Fill inputs once time with current mcap and circ supply
+async function getDataInInputs() {
+  try {
+    const dataResult = await fetch(
+      'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
+    );
+    const data = await dataResult.json();
+    let currentCirculatingSupply = data.market_data.circulating_supply;
+    const marketCapInfo = data.market_data.market_cap.usd;
+    marketCap.value = marketCapInfo;
+    currentCirculatingSupply = currentCirculatingSupply.toFixed(0);
+    circulatingSupply.value = currentCirculatingSupply;
+  } catch (error) {
+    return error;
+  }
+}
+
+// Get all essential data from coingecko api ( mcap, circSupply, price in usd, price
+// in BTC, Valuechange in 24h, and ATH in btc and usd)
 function refresh() {
   async function getPriceAndMcap() {
     try {
@@ -37,7 +57,8 @@ function refresh() {
       // get current price in BTC
       const satoshiPrice = data.tickers[4].converted_last.btc;
       // get current circulating supply
-      const currentCirculatingSupply = data.market_data.circulating_supply;
+      let currentCirculatingSupply = data.market_data.circulating_supply;
+      currentCirculatingSupply = currentCirculatingSupply.toFixed(0);
       // get current price
       const athInBtc = data.market_data.ath.btc;
       const athInUsd = data.market_data.ath.usd;
@@ -105,6 +126,8 @@ const setupEventListeners = () => {
 };
 
 setupEventListeners();
+
+getDataInInputs();
 
 window.setInterval(() => {
   refresh();

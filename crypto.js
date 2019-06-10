@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-new */
 /* eslint-disable no-undef */
 /* eslint-disable consistent-return */
@@ -32,7 +33,7 @@ const formatNumber = (num, rounder) => {
 };
 
 const formatNumbersInsideInputs = () => {
-  circulatingSupplyInput.value = 38022632;
+  circulatingSupplyInput.value = 42046512;
   new AutoNumeric('#tokenquantityInput');
   new AutoNumeric('#circulatingSupplyInput');
   new AutoNumeric('#marketcapInput');
@@ -69,12 +70,13 @@ function refresh() {
         'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
       );
       const data = await dataResult.json();
+
+      console.log(data);
       // get current price in BTC
       const satoshiPrice = data.tickers[4].converted_last.btc;
       // get current circulating supply
-      let currentCirculatingSupply = data.market_data.circulating_supply;
+      let currentCirculatingSupply = 42046512;
       currentCirculatingSupply = currentCirculatingSupply.toFixed(0);
-
       // get current price
       const athInBtc = data.market_data.ath.btc;
       const athInUsd = data.market_data.ath.usd;
@@ -93,10 +95,7 @@ function refresh() {
       )} ( Ƀ${satoshiPrice.toFixed(8)} ) with a current market cap of $${formatNumber(
         marketCapInfo,
         2,
-      )} and a current circulating supply of ${formatNumber(
-        currentCirculatingSupply,
-        2,
-      )} tokens.<br>
+      )} and a current circulating supply of 42,046,512 tokens.<br>
       All Time High in USD : $${athInUsd} <br>
       All Time High in BTC : Ƀ${athInBtc} <br>
       Value change in 24 Hours : ${roundedValueChangeIn24H} % <br>

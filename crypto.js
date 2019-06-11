@@ -8,9 +8,9 @@ let portfolioAmount;
 let hpbFuturePrice;
 let button;
 
-let marketCap = document.getElementById('marketcapInput');
-let circulatingSupply = document.getElementById('circulatingSupplyInput');
-let tokenQuantity = document.getElementById('tokenquantityInput');
+let marketCapInput = document.getElementById('marketcapInput');
+let circulatingSupplyInput = document.getElementById('circulatingSupplyInput');
+let tokenQuantityInput = document.getElementById('tokenquantityInput');
 const result = document.querySelector('#resultParagraph');
 const coinInfoParagraph = document.querySelector('#cryptoinfo');
 
@@ -33,7 +33,6 @@ const formatNumber = (num, rounder) => {
 };
 
 const formatNumbersInsideInputs = () => {
-  circulatingSupplyInput.value = 42046512;
   new AutoNumeric('#tokenquantityInput');
   new AutoNumeric('#circulatingSupplyInput');
   new AutoNumeric('#marketcapInput');
@@ -71,63 +70,66 @@ function refresh() {
       );
       const data = await dataResult.json();
 
-      console.log(data);
+      // get current price in USD
+      const currentPrice = data.market_data.current_price.usd;
+      // Hardcode current CircSupply due to false circSupply data from API
+      currentCirculatingSupply = 42046512;
+      // calculate the real mcap with the real circulating supply ( not from API )
+      const currentMarketCap = currentPrice * currentCirculatingSupply;
       // get current price in BTC
       const satoshiPrice = data.tickers[4].converted_last.btc;
-      // get current circulating supply
-      let currentCirculatingSupply = 42046512;
-      currentCirculatingSupply = currentCirculatingSupply.toFixed(0);
-      // get current price
+      // get Ath In BTC
       const athInBtc = data.market_data.ath.btc;
+      // get Ath in USD
       const athInUsd = data.market_data.ath.usd;
-      const price = data.market_data.current_price.usd;
-      const valueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.usd;
-      const roundedValueChangeIn24H = valueChangeIn24H.toFixed(2);
-      // get current mcap
-      const marketCapInfo = data.market_data.market_cap.usd;
+      // get 24H traded volume
+      const volumeIn24H = data.market_data.total_volume.usd;
+      // get valuechange in 24h ( USD )
+      const usdValueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.usd;
+      // get valuechange in 24h ( BTC )
+      const btcValueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.btc;
       // get current mcap rank
       const marketCapRank = data.market_cap_rank;
 
       // Display all data
       const coinInfo = `The current price of High Performance Blockchain is $${formatNumber(
-        price,
+        currentPrice,
         4,
       )} ( Ƀ${satoshiPrice.toFixed(8)} ) with a current market cap of $${formatNumber(
-        marketCapInfo,
+        currentMarketCap,
         2,
-      )} and a current circulating supply of 42,046,512 tokens.<br>
+      )} and a current circulating supply of ${formatNumber(
+        currentCirculatingSupply,
+        2,
+      )} tokens.<br>
       All Time High in USD : $${athInUsd} <br>
       All Time High in BTC : Ƀ${athInBtc} <br>
-      Value change in 24 Hours : ${roundedValueChangeIn24H} % <br>
+      USD Value change in 24 Hours : ${formatNumber(usdValueChangeIn24H, 2)} % <br>
+      BTC Value change in 24 Hours : ${formatNumber(btcValueChangeIn24H, 2)} % <br>
       HPB market cap rank #${marketCapRank}`;
       return coinInfo;
     } catch (error) {
       return error;
     }
   }
+
   // eslint-disable-next-line no-shadow
   getPriceAndMcap().then((result) => {
     // Cleaning our DOM before refreshing
     coinInfoParagraph.innerHTML = '';
-
     const newContent = `<p class='text-center mt-5' id='cryptoinfo'>${result}</p>`;
     coinInfoParagraph.insertAdjacentHTML('afterbegin', newContent);
   });
 }
 
 function simulateFuturePrice() {
-  formatNumbersInsideInputs();
-  new AutoNumeric('#tokenquantityInput');
-  new AutoNumeric('#circulatingSupplyInput');
-  new AutoNumeric('#marketcapInput');
+  marketCapInput = parseFloat(marketCapInput.value.split(',').join(''));
+  circulatingSupplyInput = parseFloat(circulatingSupplyInput.value.split(',').join(''));
+  tokenQuantityInput = parseFloat(tokenQuantityInput.value.split(',').join(''));
 
-  marketCap = parseFloat(marketCap.value.split(',').join(''));
-  circulatingSupply = parseFloat(circulatingSupply.value.split(',').join(''));
-  tokenQuantity = parseFloat(tokenQuantity.value.split(',').join(''));
+  portfolioAmount = (marketCapInput / circulatingSupplyInput) * tokenQuantityInput;
 
-  portfolioAmount = (marketCap / circulatingSupply) * tokenQuantity;
-
-  hpbFuturePrice = marketCap / circulatingSupply;
+  hpbFuturePrice = marketCapInput / circulatingSupplyInput;
 
   result.textContent = `
       Your hpb portfolio will worth $${formatNumber(
@@ -138,6 +140,7 @@ function simulateFuturePrice() {
   2,
 )}
     `;
+  formatNumbersInsideInputs();
 }
 
 const setupEventListeners = () => {

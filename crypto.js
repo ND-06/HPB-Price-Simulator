@@ -67,10 +67,10 @@ function refresh() {
         currentCirculatingSupply,
         2,
       )} tokens.<br>
-      ATH in USD : $${athInUsd} <br>
-      ATH in BTC : Ƀ${athInBtc} <br>
       USD Value change in 24 Hours : ${formatNumber(usdValueChangeIn24H, 2)} % <br>
       BTC Value change in 24 Hours : ${formatNumber(btcValueChangeIn24H, 2)} % <br>
+      ATH in USD : $${athInUsd} <br>
+      ATH in BTC : Ƀ${formatNumber(athInBtc, 8)} <br>
       Volume in 24 Hours : $${volumeIn24H} <br>
       HPB market cap rank #${marketCapRank}
       `;
@@ -94,7 +94,7 @@ function simulateFuturePrice() {
   portfolioAmount = (marketCap.value / circulatingSupply.value) * tokenQuantity.value;
   hpbFuturePrice = marketCap.value / circulatingSupply.value;
   result.textContent = `
-      Your hpb portfolio will worth $${formatNumber(
+      Your HPB portfolio will worth $${formatNumber(
     portfolioAmount,
     2,
   )}. With the market cap and the circulating supply specified, HPB token will worth $${formatNumber(

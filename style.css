@@ -47,6 +47,7 @@ h1 {
 
 #resultParagraph {
   font-weight: 500;
+  font-size: 1.15rem;
   color: white !important;
 }
 
@@ -56,6 +57,23 @@ input {
 
 #cryptoinfo {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   color: white;
+}
+
+.credits {
+  font-weight: 200;
+  font-size: 15px;
+  color: #30e9ff;
+  margin-bottom: 0%;
+  margin-top: 10%;
+}
+
+.credits:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-info {
+  background-color: #0fbdd96e;
 }

@@ -47,7 +47,7 @@ h1 {
 
 #resultParagraph {
   font-weight: 500;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: white !important;
 }
 
@@ -75,11 +75,17 @@ input {
 }
 
 .btn-info {
-  background-color: #0fbdd96e;
+  background-color: transparent;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: rgba(28, 161, 184, 0.685);
+  color: white;
 }
 
 .form-control {
   color: white;
-  background-color: #0fbdd96e !important;
+  background-color: #0fbed92a !important;
   border: 1px #0fbdd96e solid;
 }

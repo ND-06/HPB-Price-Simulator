@@ -90,6 +90,7 @@ function refresh() {
   });
 }
 
+// Function created to calculate the future value of HPB Price and Porfolio
 function simulateFuturePrice() {
   portfolioAmount = (marketCap.value / circulatingSupply.value) * tokenQuantity.value;
   hpbFuturePrice = marketCap.value / circulatingSupply.value;

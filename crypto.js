@@ -4,15 +4,12 @@ let portfolioAmount;
 let hpbFuturePrice;
 let button;
 
-// const marketCap = document.getElementById('marketcapInput');
-// const circulatingSupply = document.getElementById('circulatingSupplyInput');
-// const tokenQuantity = document.getElementById('tokenquantityInput');
-
 const marketCapInput = new AutoNumeric('#marketcapInput', { noEventListeners: false });
 const circSupplyInput = new AutoNumeric('#circulatingSupplyInput', {
   noEventListeners: false,
 });
 const tokenQuantityInput = new AutoNumeric('#tokenquantityInput', { noEventListeners: false });
+
 const result = document.querySelector('#resultParagraph');
 const coinInfoParagraph = document.querySelector('#cryptoinfo');
 /* eslint-disable no-const-assign */

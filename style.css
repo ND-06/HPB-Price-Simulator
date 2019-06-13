@@ -89,3 +89,7 @@ input {
   background-color: #0fbed92a !important;
   border: 1px #0fbdd96e solid;
 }
+
+textarea.form-control {
+  color: #63aeeb;
+}

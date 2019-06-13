@@ -1,13 +1,21 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-console */
 let portfolioAmount;
 let hpbFuturePrice;
 let button;
 
-const marketCap = document.getElementById('marketcapInput');
-const circulatingSupply = document.getElementById('circulatingSupplyInput');
-const tokenQuantity = document.getElementById('tokenquantityInput');
+// const marketCap = document.getElementById('marketcapInput');
+// const circulatingSupply = document.getElementById('circulatingSupplyInput');
+// const tokenQuantity = document.getElementById('tokenquantityInput');
+
+const marketCapInput = new AutoNumeric('#marketcapInput', { noEventListeners: false });
+const circSupplyInput = new AutoNumeric('#circulatingSupplyInput', {
+  noEventListeners: false,
+});
+const tokenQuantityInput = new AutoNumeric('#tokenquantityInput', { noEventListeners: false });
 const result = document.querySelector('#resultParagraph');
 const coinInfoParagraph = document.querySelector('#cryptoinfo');
+/* eslint-disable no-const-assign */
 
 const formatNumber = (num, rounder) => {
   // eslint-disable-next-line no-param-reassign
@@ -91,9 +99,14 @@ function refresh() {
 }
 
 // Function created to calculate the future value of HPB Price and Porfolio
+
 function simulateFuturePrice() {
-  portfolioAmount = (marketCap.value / circulatingSupply.value) * tokenQuantity.value;
-  hpbFuturePrice = marketCap.value / circulatingSupply.value;
+  const mc = marketCapInput.getNumber();
+  const cs = circSupplyInput.getNumber();
+  const tq = tokenQuantityInput.getNumber();
+  portfolioAmount = (mc / cs) * tq;
+  hpbFuturePrice = mc / cs;
+
   result.textContent = `
       Your HPB portfolio will worth $${formatNumber(
     portfolioAmount,

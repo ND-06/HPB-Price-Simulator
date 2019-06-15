@@ -76,7 +76,7 @@ function refresh() {
       BTC Value change in 24 Hours : ${formatNumber(btcValueChangeIn24H, 2)} % <br>
       ATH in USD : $${athInUsd} <br>
       ATH in BTC : Ƀ${formatNumber(athInBtc, 8)} <br>
-      Volume in 24 Hours : $${volumeIn24H} <br>
+      Volume in 24 Hours : $${formatNumber(volumeIn24H, 2)} <br>
       HPB market cap rank #${marketCapRank}
       `;
 

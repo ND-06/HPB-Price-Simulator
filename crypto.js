@@ -82,9 +82,9 @@ function refresh() {
         currentCirculatingSupply,
         2,
       )} tokens.<br>
-      USD Value change in 24 Hours : ${usdValueChangeIn24H} % <br>
-      BTC Value change in 24 Hours : ${btcValueChangeIn24H} % <br>
-      ETH Value change in 24 Hours : ${ethValueChangeIn24H} % <br>
+      USD Value change in 24H : ${usdValueChangeIn24H} % <br>
+      BTC Value change in 24H : ${btcValueChangeIn24H} % <br>
+      ETH Value change in 24H : ${ethValueChangeIn24H} % <br>
       ATH in USD : $${athInUsd} <br>
       ATH in BTC : Ƀ${formatNumber(athInBtc, 8)} <br>
       Volume in 24 Hours : $${formatNumber(volumeIn24H, 2)} <br>

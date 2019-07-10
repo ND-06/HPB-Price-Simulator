@@ -74,6 +74,18 @@ input {
   text-decoration: none;
 }
 
+.credits2 {
+  font-weight: 200;
+  font-size: 15px;
+  color: #30e9ff;
+  margin-bottom: 0%;
+}
+
+.credits2:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .btn-info {
   background-color: transparent;
   color: white;

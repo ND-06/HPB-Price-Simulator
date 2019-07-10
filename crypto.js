@@ -42,6 +42,8 @@ function refresh() {
       );
       const data = await dataResult.json();
 
+      console.log(data);
+
       // get current price in USD
       const currentPrice = data.market_data.current_price.usd;
       // Hardcode current CircSupply due to false circSupply data from API
@@ -57,9 +59,17 @@ function refresh() {
       // get 24H traded volume
       const volumeIn24H = data.market_data.total_volume.usd;
       // get valuechange in 24h ( USD )
-      const usdValueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.usd;
+      let usdValueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.usd;
+      // round the percentage of usdValueChangeIn24H
+      usdValueChangeIn24H = usdValueChangeIn24H.toFixed(2);
       // get valuechange in 24h ( BTC )
-      const btcValueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.btc;
+      let btcValueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.btc;
+      // round the percentage of btcValueChangeIn24H
+      btcValueChangeIn24H = btcValueChangeIn24H.toFixed(2);
+      // get valuechange in 24H ( ETH )
+      let ethValueChangeIn24H = data.market_data.price_change_percentage_24h_in_currency.eth;
+      // round the percentage of ethValueChangeIn24H
+      ethValueChangeIn24H = ethValueChangeIn24H.toFixed(2);
       // get current mcap rank
       const marketCapRank = data.market_cap_rank;
 
@@ -74,8 +84,9 @@ function refresh() {
         currentCirculatingSupply,
         2,
       )} tokens.<br>
-      USD Value change in 24 Hours : ${formatNumber(usdValueChangeIn24H, 2)} % <br>
-      BTC Value change in 24 Hours : ${formatNumber(btcValueChangeIn24H, 2)} % <br>
+      USD Value change in 24 Hours : ${usdValueChangeIn24H} % <br>
+      BTC Value change in 24 Hours : ${btcValueChangeIn24H} % <br>
+      ETH Value change in 24 Hours : ${ethValueChangeIn24H} % <br>
       ATH in USD : $${athInUsd} <br>
       ATH in BTC : Ƀ${formatNumber(athInBtc, 8)} <br>
       Volume in 24 Hours : $${formatNumber(volumeIn24H, 2)} <br>

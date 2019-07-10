@@ -1,16 +1,24 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 let portfolioAmount;
 let hpbFuturePrice;
 let button;
 
-const marketCapInput = new AutoNumeric('#marketcapInput', { noEventListeners: false });
+const marketCapInput = new AutoNumeric('#marketcapInput', {
+  noEventListeners: false,
+  readOnly: false,
+});
+
 const circSupplyInput = new AutoNumeric('#circulatingSupplyInput', {
   noEventListeners: false,
   readOnly: false,
 });
 
-const tokenQuantityInput = new AutoNumeric('#tokenquantityInput', { noEventListeners: false });
+const tokenQuantityInput = new AutoNumeric('#tokenquantityInput', {
+  noEventListeners: false,
+  readOnly: false,
+});
 
 const result = document.querySelector('#resultParagraph');
 const coinInfoParagraph = document.querySelector('#cryptoinfo');
@@ -106,7 +114,7 @@ function refresh() {
   });
 }
 
-// Function created to calculate the future value of HPB Price and Porfolio
+// Function created to calculate the future value of HPB Price and Porfolio worth
 
 function simulateFuturePrice() {
   const mc = marketCapInput.getNumber();
@@ -139,10 +147,36 @@ const setupEventListeners = () => {
 
 setupEventListeners();
 
-// Set the circ supply input directly at 42046512 and let to the user
-// the possibily to modify this value
-circSupplyInput.set(42046512, { readOnly: false });
+// Create a function to set the circ supply input directly at 42046512
+// ( real circ supply ) and set directly the current mcap (by calling API) in corresponding inputs
+// and let to the user the possibily to modify theses values
+async function circSupplyAndMcapInInputs() {
+  try {
+    const dataResult = await fetch(
+      'https://api.coingecko.com/api/v3/coins/high-performance-blockchain',
+    );
+    const data = await dataResult.json();
+    // Hardcode current CircSupply due to false circSupply data from API
+    const currentCirculatingSupply = 42046512;
+    circSupplyInput.set(42046512, { readOnly: false });
 
+    // Get the current price of HPB by calling API , we need this information to calculate
+    // the real marketcap ( cause CoinGecko API doesnt have the right circ supply of HPB)
+    const currentPrice = data.market_data.current_price.usd;
+
+    // calculate the real mcap with the real circulating supply ( not from API )
+    const currentMarketCap = currentPrice * currentCirculatingSupply;
+    // Set directly the marketCap into marketCap Input ( and let the user modify this value too)
+    marketCapInput.set(currentMarketCap, { readOnly: false });
+  } catch (error) {
+    return error;
+  }
+}
+
+circSupplyAndMcapInInputs();
+
+// Refresh getPriceAndMcap function with the API Call each 650 ms
+// in order to get fresh live informations in our App
 window.setInterval(() => {
   refresh();
 }, 650);

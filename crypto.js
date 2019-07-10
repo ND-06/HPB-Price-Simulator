@@ -7,7 +7,9 @@ let button;
 const marketCapInput = new AutoNumeric('#marketcapInput', { noEventListeners: false });
 const circSupplyInput = new AutoNumeric('#circulatingSupplyInput', {
   noEventListeners: false,
+  readOnly: false,
 });
+
 const tokenQuantityInput = new AutoNumeric('#tokenquantityInput', { noEventListeners: false });
 
 const result = document.querySelector('#resultParagraph');
@@ -127,6 +129,10 @@ const setupEventListeners = () => {
 };
 
 setupEventListeners();
+
+// Set the circ supply input directly at 42046512 and let to the user
+// the possibily to modify this value
+circSupplyInput.set(42046512, { readOnly: false });
 
 window.setInterval(() => {
   refresh();

@@ -42,8 +42,6 @@ function refresh() {
       );
       const data = await dataResult.json();
 
-      console.log(data);
-
       // get current price in USD
       const currentPrice = data.market_data.current_price.usd;
       // Hardcode current CircSupply due to false circSupply data from API

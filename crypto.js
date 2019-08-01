@@ -127,7 +127,7 @@ function simulateFuturePrice() {
       Your HPB portfolio will worth $${formatNumber(
     portfolioAmount,
     2,
-  )}. With the market cap and the circulating supply specified, HPB token will worth $${formatNumber(
+  )}. With the market cap and the circulating supply specified, HPB coin will worth $${formatNumber(
   hpbFuturePrice,
   2,
 )}

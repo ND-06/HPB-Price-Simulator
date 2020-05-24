@@ -53,7 +53,7 @@ function refresh() {
       // get current price in USD
       const currentPrice = data.market_data.current_price.usd;
       // Hardcode current CircSupply due to false circSupply data from API
-      const currentCirculatingSupply = 42046512;
+      const currentCirculatingSupply = 57903793;
       // calculate the real mcap with the real circulating supply ( not from API )
       const currentMarketCap = currentPrice * currentCirculatingSupply;
       // get current price in BTC
@@ -157,8 +157,8 @@ async function circSupplyAndMcapInInputs() {
     );
     const data = await dataResult.json();
     // Hardcode current CircSupply due to false circSupply data from API
-    const currentCirculatingSupply = 42046512;
-    circSupplyInput.set(42046512, { readOnly: false });
+    const currentCirculatingSupply = 57903793;
+    circSupplyInput.set(57903793, { readOnly: false });
 
     // Get the current price of HPB by calling API , we need this information to calculate
     // the real marketcap ( cause CoinGecko API doesnt have the right circ supply of HPB)
